@@ -35,12 +35,11 @@ jobs:
 
       - name: Package and Push Helm Chart
         run: |
-          CHART_DIR="charts/my-sample-chart"
-          VERSION=$(grep '^version:' $CHART_DIR/Chart.yaml | awk '{print $2}')
-          CHART_NAME="my-sample-chart"
-
-          # Package chart
-          helm package $CHART_DIR --destination ./
-
-          # Export to OCI-compatible format
-          helm push ${CHART_NAME}-${VERSION}.tgz oci://ghcr.io/${{ env.OWNER }}
+          for CHART_DIR in charts/*/; do
+            if [ -f "${CHART_DIR}Chart.yaml" ]; then
+              CHART_NAME=$(basename "$CHART_DIR")
+              VERSION=$(grep '^version:' "${CHART_DIR}Chart.yaml" | awk '{print $2}')
+              # Package chart
+              helm package "$CHART_DIR" --destination ./
+              # Export to OCI-compatible format
+              helm push "${CHART_NAME}-${VERSION}.tgz" oci://ghcr.io/${{ env.OWNER }}
