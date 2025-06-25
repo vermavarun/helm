@@ -6,14 +6,14 @@ on:
     branches:
       - main
     paths:
-      - 'charts/**'  # only run when charts are modified
+      - 'charts/**'
 
 env:
   REGISTRY: ghcr.io
   OWNER: ${{ github.repository_owner }}
 
 jobs:
-  helm-chart-publish:
+  publish:
     runs-on: ubuntu-latest
 
     permissions:
@@ -29,18 +29,18 @@ jobs:
         with:
           version: v3.14.0
 
-      - name: Log in to GHCR
-        run: echo "${{ secrets.CR_PAT }}" | helm registry login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Enable OCI support
+        run: |
+          helm registry login ghcr.io -u ${{ github.actor }} --password-stdin <<< "${{ secrets.CR_PAT }}"
 
-      - name: Package Helm chart
+      - name: Package and Push Helm Chart
         run: |
           CHART_DIR="charts/my-sample-chart"
           VERSION=$(grep '^version:' $CHART_DIR/Chart.yaml | awk '{print $2}')
+          CHART_NAME="my-sample-chart"
+
+          # Package chart
           helm package $CHART_DIR --destination ./
 
-      - name: Push Helm chart to GHCR
-        run: |
-          CHART_NAME="my-sample-chart"
-          VERSION=$(grep '^version:' charts/$CHART_NAME/Chart.yaml | awk '{print $2}')
-          helm chart save ${CHART_NAME}-${VERSION}.tgz ghcr.io/${{ env.OWNER }}/${CHART_NAME}:${VERSION}
-          helm chart push ghcr.io/${{ env.OWNER }}/${CHART_NAME}:${VERSION}
+          # Export to OCI-compatible format
+          helm push ${CHART_NAME}-${VERSION}.tgz oci://ghcr.io/${{ env.OWNER }}
