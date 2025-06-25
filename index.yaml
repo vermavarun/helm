@@ -9,6 +9,6 @@ entries:
     name: my-sample-chart
     type: application
     urls:
-    - https://vermavarun.github.io/my-helm-repo/my-sample-chart-0.1.0.tgz
+    - https://vermavarun.github.io/helm/my-sample-chart-0.1.0.tgz
     version: 0.1.0
 generated: "2025-06-25T17:01:15.4892445+05:30"
