@@ -43,3 +43,5 @@ jobs:
               helm package "$CHART_DIR" --destination ./
               # Export to OCI-compatible format
               helm push "${CHART_NAME}-${VERSION}.tgz" oci://ghcr.io/${{ env.OWNER }}
+            fi
+          done
