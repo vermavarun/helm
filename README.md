@@ -8,3 +8,16 @@ steps
 - git add .
 - git commit -m "Add my-sample-chart"
 - git push origin main
+
+
+
+# chart locations
+
+- https://github.com/users/vermavarun/packages/container/package/my-sample-chart
+
+
+# chart usage:
+
+- helm registry login ghcr.io
+- helm install my-release oci://ghcr.io/vermavarun/my-sample-chart --version <version>
+- helm install myapp oci://ghcr.io/varunverma/my-sample-chart --version 0.1.0
