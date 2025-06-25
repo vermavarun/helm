@@ -1,0 +1,45 @@
+name: Publish Helm Chart to GHCR
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'charts/**'  # only run when charts are modified
+
+env:
+  REGISTRY: ghcr.io
+  OWNER: ${{ github.repository_owner }}
+
+jobs:
+  helm-chart-publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: v3.14.0
+
+      - name: Log in to GHCR
+        run: echo "${{ secrets.CR_PAT }}" | helm registry login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Package Helm chart
+        run: |
+          CHART_DIR="charts/my-sample-chart"
+          VERSION=$(grep '^version:' $CHART_DIR/Chart.yaml | awk '{print $2}')
+          helm package $CHART_DIR --destination ./
+
+      - name: Push Helm chart to GHCR
+        run: |
+          CHART_NAME="my-sample-chart"
+          VERSION=$(grep '^version:' charts/$CHART_NAME/Chart.yaml | awk '{print $2}')
+          helm chart save ${CHART_NAME}-${VERSION}.tgz ghcr.io/${{ env.OWNER }}/${CHART_NAME}:${VERSION}
+          helm chart push ghcr.io/${{ env.OWNER }}/${CHART_NAME}:${VERSION}
