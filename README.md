@@ -19,5 +19,6 @@ steps
 # chart usage:
 
 - helm registry login ghcr.io
-- helm install my-release oci://ghcr.io/vermavarun/my-sample-chart --version <version>
+- helm repo add vhelm https://vermavarun.github.io/vhelm
+- helm install my-release oci://ghcr.io/vermavarun/my-sample-chart --version 0.1.0
 - helm install myapp oci://ghcr.io/varunverma/my-sample-chart --version 0.1.0
