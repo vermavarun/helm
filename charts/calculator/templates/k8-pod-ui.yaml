@@ -17,8 +17,7 @@ spec:
     spec:
       containers:
         - name: react-ui
-          image: vermavarun/theapplication:ui
-          #image: invvggregistry.azurecr.io/theapplication:ui
+          image: ghcr.io/vermavarun/calculation-ui:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5001
@@ -36,9 +35,8 @@ spec:
               memory: 256Mi
               cpu: "0.2"
         - name: node-api
-          image: vermavarun/theapplication:nodeapi
-          #image: invvggregistry.azurecr.io/theapplication:nodeapi
-          imagePullPolicy: IfNotPresent
+          image: ghcr.io/vermavarun/calculation-proxy:latest
+=          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
               protocol: TCP
