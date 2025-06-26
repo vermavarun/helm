@@ -44,7 +44,7 @@ spec:
               protocol: TCP
           env:
             - name: APP_SERVICE_URL
-              value: http://ms-api:80
+              value: http://{{ include "calculator.fullname" . }}-api:80
           resources:
             limits:
               memory: 512Mi
