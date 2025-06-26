@@ -1,14 +1,25 @@
 apiVersion: v1
 entries:
+  calculator:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2025-06-25T20:18:12.550123+05:30"
+    description: A Helm chart for Kubernetes
+    digest: 84ef8323bc4e963f33c492a38d55937c5e821bf3929d08f4dfbce521cb480b33
+    name: calculator
+    type: application
+    urls:
+    - https://vermavarun.github.io/vhelm/charts/calculator-0.1.0.tgz
+    version: 0.1.0
   my-sample-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-06-25T17:16:05.3421183+05:30"
+    created: "2025-06-25T20:18:12.551495+05:30"
     description: A Helm chart for Kubernetes
     digest: e290aab6f3882201a2ff3e10555cc920e9d6d61661bfb82eb1af4f625fb7069c
     name: my-sample-chart
     type: application
     urls:
-    - https://vermavarun.github.io/helm/my-sample-chart-0.1.0.tgz
+    - https://vermavarun.github.io/vhelm/charts/my-sample-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-25T17:16:05.3261232+05:30"
+generated: "2025-06-25T20:18:12.547891+05:30"
