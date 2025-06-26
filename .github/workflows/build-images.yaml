@@ -63,7 +63,7 @@ jobs:
         context: ${{ matrix.context }}
         file: ${{ matrix.dockerfile }}
         push: true
-        tags: ${{ env.REGISTRY }}/${{ matrix.image }}:latest     
+        tags: ${{ env.REGISTRY }}/${{ github.actor }}/${{ matrix.image }}:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
         platforms: linux/amd64,linux/arm64
