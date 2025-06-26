@@ -20,7 +20,7 @@ spec:
       containers:
         - name: {{ include "calculator.name" . }}-api
           image: ghcr.io/vermavarun/calculation-api:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
               protocol: TCP
