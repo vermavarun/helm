@@ -36,7 +36,7 @@ spec:
               cpu: "0.2"
         - name: node-api
           image: ghcr.io/vermavarun/calculation-proxy:latest
-=          imagePullPolicy: IfNotPresent
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
               protocol: TCP
