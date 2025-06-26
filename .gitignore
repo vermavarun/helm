@@ -5,7 +5,6 @@ dist
 bin
 coverage
 .vscode
-.env
 *.log
 *.tmp
 *.bak
