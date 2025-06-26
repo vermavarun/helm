@@ -1,5 +1,9 @@
 # vhelm
 
+[![Build and Push Docker Images](https://github.com/vermavarun/vhelm/actions/workflows/build-images.yaml/badge.svg)](https://github.com/vermavarun/vhelm/actions/workflows/build-images.yaml)
+[![pages-build-deployment](https://github.com/vermavarun/vhelm/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/vermavarun/vhelm/actions/workflows/pages/pages-build-deployment)
+[![Publish Helm Chart to GHCR](https://github.com/vermavarun/vhelm/actions/workflows/build-charts.yaml/badge.svg)](https://github.com/vermavarun/vhelm/actions/workflows/build-charts.yaml)
+
 # local package steps
 
 - helm create my-sample-chart
