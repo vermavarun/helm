@@ -1,22 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: react-ui
+  name: {{ include "calculator.fullname" . }}-ui
   labels:
-    app: react-ui
+    app: {{ include "calculator.name" . }}-ui
+    {{- include "calculator.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: react-ui
+      app: {{ include "calculator.name" . }}-ui
+      {{- include "calculator.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: react-ui
-        service: react-ui
+        app: {{ include "calculator.name" . }}-ui
+        {{- include "calculator.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-        - name: react-ui
+        - name: {{ include "calculator.name" . }}-ui
           image: ghcr.io/vermavarun/calculation-ui:latest
           imagePullPolicy: IfNotPresent
           ports:

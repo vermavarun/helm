@@ -1,22 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ms-api
+  name: {{ include "calculator.fullname" . }}-api
   labels:
-    app: ms-api
+    app: {{ include "calculator.name" . }}-api
+    {{- include "calculator.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: ms-api
+      app: {{ include "calculator.name" . }}-api
+      {{- include "calculator.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: ms-api
-        service: ms-api
+        app: {{ include "calculator.name" . }}-api
+        {{- include "calculator.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-        - name: ms-api
+        - name: {{ include "calculator.name" . }}-api
           image: ghcr.io/vermavarun/calculation-api:latest
           imagePullPolicy: IfNotPresent
           ports:
